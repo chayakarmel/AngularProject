@@ -1,0 +1,28 @@
+<!-- <input [(ngModel)]="paramValue"/> -->
+<form [formGroup]="registerForm">
+    <div><label>שם</label>
+
+        <input type="text" formControlName="name" name="name" id="name" [(ngModel)]="paramValue" />
+        <div *ngIf="registerForm.controls['name'].invalid&&registerForm.controls['name'].touched">This Field Is Required
+        </div>
+    </div>
+    <div>
+        <label>כתובת</label>
+        <input type="text" formControlName="address" name="address" id="address" />
+    </div>
+    <div>
+        <label>מייל</label>
+        <input type="email" formControlName="email" name="email" id="email" />
+        <div *ngIf="registerForm.controls['email'].errors?.['required']&&registerForm.controls['email'].touched">This Field Is Required</div>
+        <div *ngIf="registerForm.controls['email'].errors?.['email']">Invalid email address</div>
+        
+    </div>
+    <label>סיסמה</label>
+    <input type="password" formControlName="password" name="password" id="password" />
+    <div *ngIf="registerForm.controls['password'].errors?.['required']&&registerForm.controls['password'].touched">This Field Is Required</div>
+    <div *ngIf="registerForm.controls['password'].errors?.['minlength']">Password mast be at least 6 characters</div>
+    <div *ngIf="registerForm.controls['password'].errors?.['maxlength']">Password can't be more then 10 characters</div>
+    <div *ngIf="registerForm.controls['password'].errors?.['pattern']">Password need match</div>
+    <button type="submit" (click)="saveNewUser()" [disabled]="!registerForm.valid">Save</button>
+
+</form>

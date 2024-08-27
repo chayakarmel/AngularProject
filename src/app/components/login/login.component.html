@@ -1,0 +1,17 @@
+<div>
+    <form>
+        <label>שם משתמש:</label>
+        <input type="text" name="name" placeholder="שם משתמש" [(ngModel)]="username" />
+
+        <label>סיסמה:</label>
+        <input type="password" name="password" placeholder="סיסמה" [(ngModel)]="password" />
+        <button type="submit" (click)="isUserExist()" [disabled]>התחבר</button>
+    </form>
+</div>
+<br />
+<!-- <a routerLink="/Lecturer-registration">הרשם כמרצה</a> -->
+<form>
+    <p>הרשמה כמרצה:</p>
+    <input type="text" name="courseName" placeholder="שם הקורס" [(ngModel)]="courseName" />
+    <button  type="submit"  (click)="LecturerRegistration()" [disabled]>הרשם </button>
+</form>

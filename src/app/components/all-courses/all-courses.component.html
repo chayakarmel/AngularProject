@@ -1,0 +1,4 @@
+<p>all-courses works!</p>
+@for (item of courses;  track item.courseId){
+<app-course-details [oneCourse]="item"></app-course-details>
+}

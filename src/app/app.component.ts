@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { AddCourseComponent } from './components/add-course/add-course.component';
 import { AllCoursesComponent } from './components/all-courses/all-courses.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -8,7 +9,7 @@ import { RegisterComponent } from './components/register/register.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,LoginComponent,AllCoursesComponent,RegisterComponent,NavBarComponent,RouterLink ],
+  imports: [RouterOutlet,LoginComponent,AllCoursesComponent,RegisterComponent,NavBarComponent,RouterLink,AddCourseComponent ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

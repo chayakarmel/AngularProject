@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import User from '../../models/User';
 
 
@@ -8,46 +10,29 @@ import User from '../../models/User';
   providedIn: 'root'
 })
 export class UserService {
-   users: User[] = [
-    {
-      id: 1,
-      name: "chaya",
-      address: "Rabi Akiva 118",
-      email: "chayaka@bdo.co.il",
-      password: "123456"
-    },
-    {
-      id: 2,
-      name: "pery",
-      address: "Bnei Brak",
-      email: "pe0533183564@gmail.com",
-      password: "456456"
-    },
-    {
-      id: 3,
-      name: "leha",
-      address: "Ashdod",
-      email: "l0533105649@gmailcom",
-      password: "78910"
-    },
-   
-    {
-      id: 4,
-      name: "deby",
-      address: "Bal Shem Tov 9",
-      email: "chayakarmel207@gmeil.com",
-      password: "741963"
-    },
-  
-  ]
-  
-  
-  
+   users: User[] = [];
 
+  BASE_URL = "https://localhost:7159/api/Users";
 
-  getUser(){
-     return this.users;
+  constructor(private myHttp: HttpClient) { }
+
+  getUser():Observable<User[]>  {
+    return this.myHttp.get<User[]>(`${this.BASE_URL}`);
   }
+  // getUserById(id: number) {
+  //   return this.myHttp.get<User>(`${this.BASE_URL}/${id}`);
+  // }
+  createUser(data: User) {
+    return this.myHttp.post<User>(`${this.BASE_URL}`, data);
+  }
+  // updateUser(id: number, data: User) {
+  //   return this.myHttp.put<User>(`${this.BASE_URL}/update/${id}`,data);
+  // }
+  // deleteUser(id:number){
+  //   return this.myHttp.delete(`${this.BASE_URL}/delete/${id}`);
+  // }
 
-  constructor() { }
+
+
+  
 }

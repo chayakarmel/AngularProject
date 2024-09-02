@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import User from '../../models/User';
+import Category from '../../models/Category';
 
 
 
@@ -9,22 +9,22 @@ import User from '../../models/User';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-   users: User[] = [];
+export class CategoryService {
+  categories:Category[]=[]
 
-  BASE_URL = "https://localhost:7159/api/Users";
+  BASE_URL = "https://localhost:7159/api/Category";
 
   constructor(private myHttp: HttpClient) { }
 
-  getUser():Observable<User[]>  {
-    return this.myHttp.get<User[]>(`${this.BASE_URL}`);
+  getCategory():Observable<Category[]>  {
+    return this.myHttp.get<Category[]>(`${this.BASE_URL}`);
   }
   // getUserById(id: number) {
   //   return this.myHttp.get<User>(`${this.BASE_URL}/${id}`);
   // }
-  createUser(data: User) {
-    return this.myHttp.post<User>(`${this.BASE_URL}`, data);
-  }
+  // createUser(data: Category) {
+  //   return this.myHttp.post<User>(`${this.BASE_URL}`, data);
+  // }
 
   
   // updateUser(id: number, data: User) {

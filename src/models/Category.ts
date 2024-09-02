@@ -1,10 +1,10 @@
 export default class Category {
-    id: number;
+  categoryId: number;
     name: string;
     iconPath: string;
   
-    constructor(id: number, name: string, iconPath: string) {
-      this.id = id;
+    constructor(categoryId: number, name: string, iconPath: string) {
+      this.categoryId = categoryId;
       this.name = name;
       this.iconPath = iconPath;
     }

@@ -15,8 +15,9 @@
 <div>
   <label>קטגוריה</label>
   <select formControlName="categoryId" id="categoryId"> <!-- השתמש ב-"categoryId" -->
-    <option value="category1">Category 1</option>
-    <option value="category2">Category 2</option>
+    @for(item of category; track item.categoryId){
+          <option [value]="item.categoryId">{{item.name}}</option>
+    }
   </select>
   <div *ngIf="courseForm.controls['categoryId'].invalid && courseForm.controls['categoryId'].touched">
     This Field Is Required
@@ -63,6 +64,7 @@
     </div>
     <button type="button" (click)="addSyllabus()">הוספת סיליבוס</button>
 </div>  
+
 
 
     <!--   צורת למידה-->

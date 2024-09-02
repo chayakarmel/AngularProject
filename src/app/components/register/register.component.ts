@@ -17,7 +17,7 @@ import { take } from 'rxjs';
 
 export class RegisterComponent implements OnInit {
 
-
+  isUser:boolean=false;
   paramValue: string = "";
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private user: UserService) {
   }
@@ -25,28 +25,50 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({});
 
   //יש קודם לעשות פונקציה שתבדוק האם המשתמש כבר קיים getUserById? ורק אם לא קיים תעביר לפונקצציה הנ"ל
-
-  saveNewUser(){
-    const data:User = {
-      // id:4,//יש לשנות לאוטומטי 
-      name: this.registerForm.get('name')!.value,
-      email: this.registerForm.get('email')!.value,
-      address:this.registerForm.get('address')?.value,
-      password:this.registerForm.get('password')!.value, 
-    }
-
-    this.user.createUser(data).pipe(take(1)).subscribe(
-      myRes => {
-      console.log("success" ,myRes);
-      alert("נרשמת בהצלחה!");
-      // console.log(this.registerForm.value);
-      this.router.navigate(['/allCourses'])
-    }, err => {
-      alert("ERROR!");
-     
-    })
- 
+  isUserExist(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.user.getUser().pipe(take(1)).subscribe(myRes => {
+        const userExists = myRes.find(user =>
+          user.name === this.registerForm.get('name')!.value &&
+          user.password === this.registerForm.get('password')!.value &&
+          user.email === this.registerForm.get('email')!.value
+        );
+        resolve(!!userExists);
+      }, err => {
+        alert("ERROR!");
+        reject(false);
+      });
+    });
   }
+  async saveNewUser() {
+    try {
+      this.isUser = await this.isUserExist();
+      if (!this.isUser) {
+        const data: User = {
+          name: this.registerForm.get('name')!.value,
+          email: this.registerForm.get('email')!.value,
+          address: this.registerForm.get('address')?.value,
+          password: this.registerForm.get('password')!.value,
+        }
+
+        this.user.createUser(data).pipe(take(1)).subscribe(
+          myRes => {
+            console.log("success", myRes);
+            alert("נרשמת בהצלחה!");
+            this.router.navigate(['/allCourses']);
+          }, err => {
+            alert("ERROR!");
+          }
+        );
+      } else {
+        alert("היוזר כבר קיים במערכת!!!!!");
+      }
+    } catch (error) {
+      // Handle errors from isUserExist
+      console.error('Error checking user existence:', error);
+    }
+  }
+
 
   ngOnInit(): void {
 

@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CategoryService } from '../../services/category.service';
+import {  take } from 'rxjs';
+import Category from '../../../models/Category';
 
 @Component({
   selector: 'app-add-course',
@@ -13,8 +16,8 @@ import { Router } from '@angular/router';
 
 export class AddCourseComponent {
   courseForm: FormGroup = new FormGroup({});
-
-  constructor(private fb: FormBuilder, private router: Router) { }
+  category:Category[]=[];
+  constructor(private fb: FormBuilder, private router: Router,private categories: CategoryService) { }
 
 
 
@@ -29,6 +32,7 @@ export class AddCourseComponent {
       lecturerId: ['', Validators.required],
       imagePath: ['']
     });
+    this.getCategories();
   }
 
   get syllabus(): FormArray {
@@ -46,10 +50,20 @@ export class AddCourseComponent {
 
   saveNewCourse(): void {
     if (this.courseForm.valid) {
-      console.log(this.courseForm.value);
+      console.log("course:",this.courseForm.value);
       this.router.navigate(['/allCourses']);
     }
   }
+
+ getCategories() {
+    this.categories.getCategory().pipe(take(1)).subscribe(myRes => {
+        this.category=myRes;
+        console.log(this.category);
+      }, err => {
+        alert("ERROR!");
+    });
+}
+
 
 
 }

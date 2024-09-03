@@ -63,6 +63,10 @@
       <button type="button" (click)="removeSyllabus(i)" *ngIf="syllabus.length > 1">מחק</button>
     </div>
     <button type="button" (click)="addSyllabus()">הוספת סיליבוס</button>
+    <div *ngIf="courseForm.controls['syllabus'].invalid&& courseForm.controls['syllabus'].touched">This
+        Field Is
+        Required
+    </div>
 </div>  
 
 

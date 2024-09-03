@@ -1,4 +1,73 @@
-<p>all-courses works!</p>
-@for (item of courses;  track item.courseId){
-<app-course-details [oneCourse]="item"></app-course-details>
-}
+
+<!-- @for (item of courses;  track item.courseId){
+    <app-course-details [oneCourse]="item"></app-course-details>
+    }  --> 
+
+<!-- טופס סינון לפי שם קורס -->
+<!-- <div>
+    <label for="textInput">שם קורס:</label>
+    <input
+      type="text"
+      id="textInput"
+      (input)="onInputChange($event)"
+      placeholder="חפש לפי שם קורס"
+    />
+  </div>
+   <label>קטגוריה</label>
+  <select id="category" name="category"> 
+    @for(item of category; track item.categoryId){
+          <option [value]="item.categoryId">{{item.name}}</option>
+    }
+  </select>
+  <div>
+   
+   
+  </div>
+  
+  <div *ngIf="filteredCourses && filteredCourses.length > 0; else noCourses">
+    <p>קורסים זמינים:</p>
+    <div *ngFor="let item of filteredCourses">
+      <app-course-details [oneCourse]="item"></app-course-details>
+    </div>
+  </div>
+  
+  <ng-template #noCourses>
+    <p>לא נמצאו קורסים התואמים לחיפוש שלך.</p>
+  </ng-template>
+   -->
+
+<!-- טופס סינון לפי שם קורס -->
+<div>
+    <label for="textInput">שם קורס:</label>
+    <input
+      type="text"
+      id="textInput"
+      (input)="onInputChange($event)"
+      placeholder="חפש לפי שם קורס"
+    />
+</div>
+
+<label for="category">קטגוריה:</label>
+<select id="category" (change)="onCategoryChange($event)">
+  <option value="">בחר קטגוריה</option> <!-- אפשרות לבחירה ריקה כדי לא לסנן לפי קטגוריה -->
+  <option *ngFor="let item of category" [value]="item.categoryId">{{item.name}}</option>
+</select>
+
+<label for="learningMode">אופן למידה:</label>
+<select id="learningMode" (change)="onLearningModeChange($event)">
+  <option value="">בחר אופן למידה</option>
+  <option value="1">פרונטלי</option>
+  <option value="2">זום</option>
+</select>
+
+<!-- הצגת הקורסים -->
+<div *ngIf="filteredCourses && filteredCourses.length > 0; else noCourses">
+  <p>קורסים זמינים:</p>
+  <div *ngFor="let item of filteredCourses">
+    <app-course-details [oneCourse]="item"></app-course-details>
+  </div>
+</div>
+
+<ng-template #noCourses>
+  <p>לא נמצאו קורסים התואמים לחיפוש שלך.</p>
+</ng-template>

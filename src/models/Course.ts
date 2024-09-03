@@ -7,7 +7,7 @@ export class Course {
   numberOfLessons: number;
   startDate: Date;
   syllabus: string[]; 
-  learningMode: LearningMode; 
+  modeId: string; 
   lecturerId: number;
   imagePath: string;
 
@@ -18,7 +18,7 @@ export class Course {
     numberOfLessons: number,
     startDate: Date,
     syllabus: string[],
-    learningMode: LearningMode,
+    modeId: string,
     lecturerId: number,
     imagePath: string
   ) {
@@ -28,7 +28,7 @@ export class Course {
     this.numberOfLessons = numberOfLessons;
     this.startDate = startDate;
     this.syllabus = syllabus;
-    this.learningMode = learningMode;
+    this.modeId = modeId;
     this.lecturerId = lecturerId;
     this.imagePath = imagePath;
   }

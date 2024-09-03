@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import {  take } from 'rxjs';
 import Category from '../../../models/Category';
+import { Course } from '../../../models/Course';
+import { CourseService } from '../../services/course.service';
 
 @Component({
   selector: 'app-add-course',
@@ -17,7 +19,7 @@ import Category from '../../../models/Category';
 export class AddCourseComponent {
   courseForm: FormGroup = new FormGroup({});
   category:Category[]=[];
-  constructor(private fb: FormBuilder, private router: Router,private categories: CategoryService) { }
+  constructor(private fb: FormBuilder, private router: Router,private categories: CategoryService,private course:CourseService) { }
 
 
 
@@ -27,7 +29,8 @@ export class AddCourseComponent {
       categoryId: ['', Validators.required],
       numberOfLessons: ['', Validators.required],
       startDate: ['', Validators.required],
-      syllabus: this.fb.array(['', Validators.required]),
+       syllabus: this.fb.array(['', Validators.required]),
+      // syllabus: this.fb.array([this.fb.control('', Validators.required)]), 
       learningMode: ['', Validators.required],
       lecturerId: ['', Validators.required],
       imagePath: ['']
@@ -48,12 +51,59 @@ export class AddCourseComponent {
     (this.courseForm.get('syllabus') as FormArray).removeAt(index);
   }
 
-  saveNewCourse(): void {
-    if (this.courseForm.valid) {
-      console.log("course:",this.courseForm.value);
-      this.router.navigate(['/allCourses']);
+ 
+  onInputChange(index: number) {
+    const control = this.syllabus.at(index);
+    if (control.value === '') {
+      this.removeSyllabus(index);
     }
   }
+  
+  saveNewCourse(){
+    if (this.courseForm.valid) {
+          console.log("course:",this.courseForm.value);
+          this.router.navigate(['/allCourses']);
+        }
+      }
+  
+
+  saveNewCoursesss() {
+    try {
+        const data: Course = {
+          // לשים לב          
+          courseId: this.courseForm.get('name')!.value,
+          courseName: this.courseForm.get('courseName')!.value,
+          categoryId: this.courseForm.get('categoryId')?.value,
+          numberOfLessons: this.courseForm.get('numberOfLessons')!.value,
+          startDate: this.courseForm.get('startDate')!.value,
+          // לשים לב
+         syllabus: this.courseForm.get('password')!.value,
+          modeId: this.courseForm.get('learningMode')!.value,
+          lecturerId: this.courseForm.get('lecturerId')!.value,
+          imagePath: this.courseForm.get('imagePath')!.value,
+        }
+
+        this.course.createCourse(data).pipe(take(1)).subscribe(
+          myRes => {
+            console.log("success", myRes);
+            alert("הקורס נוסף בהצלחה!");
+            this.router.navigate(['/allCourses']);
+          }, err => {
+            alert("ERROR!");
+          }
+        );
+      }  catch (error) {
+      // Handle errors from isUserExist
+      console.error('Error checking user existence:', error);
+    }
+  }
+
+
+  //   if (this.courseForm.valid) {
+  //     console.log("course:",this.courseForm.value);
+  //     this.router.navigate(['/allCourses']);
+  //   }
+  // }
 
  getCategories() {
     this.categories.getCategory().pipe(take(1)).subscribe(myRes => {

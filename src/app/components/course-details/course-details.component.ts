@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Course } from '../../../models/Course';
-import { LearningMode } from '../../../models/LearningMode.enum';
 
 @Component({
   selector: 'app-course-details',
@@ -20,7 +19,7 @@ export class CourseDetailsComponent {
       numberOfLessons: 12,
       startDate: new Date(2023, 5, 20),
       syllabus: ["hgf", "nhbvc"],
-      learningMode: LearningMode.Zoom,
+      modeId:"1",
       lecturerId: 160,
       imagePath: "VBN",
     }

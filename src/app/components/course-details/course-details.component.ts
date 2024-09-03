@@ -1,15 +1,16 @@
-import { Component, Input } from '@angular/core';
 import { Course } from '../../../models/Course';
-
+import {ChangeDetectionStrategy, Component,Input } from '@angular/core';
+import {MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-course-details',
   standalone: true,
-  imports: [],
+  imports: [MatCardModule, MatButtonModule],
   templateUrl: './course-details.component.html',
   styleUrl: './course-details.component.scss'
 })
 export class CourseDetailsComponent {
-
+  
   @Input()
   oneCourse: Course =
     {
@@ -24,6 +25,7 @@ export class CourseDetailsComponent {
       imagePath: "VBN",
     }
 
+   
     
 
 }

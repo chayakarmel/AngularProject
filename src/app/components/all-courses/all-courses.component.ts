@@ -114,8 +114,10 @@
 
 
 // }
-
-import { Component, OnInit } from '@angular/core';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {ChangeDetectionStrategy ,Component, OnInit } from '@angular/core';
 import { Course } from '../../../models/Course';
 import { CourseService } from '../../services/course.service';
 import { take } from 'rxjs';
@@ -127,9 +129,9 @@ import Category from '../../../models/Category';
 @Component({
   selector: 'app-all-courses',
   standalone: true,
-  imports: [CourseDetailsComponent, CommonModule],
+  imports: [CourseDetailsComponent, CommonModule,MatFormFieldModule, MatInputModule, MatSelectModule],
   templateUrl: './all-courses.component.html',
-  styleUrls: ['./all-courses.component.scss']
+  styleUrls: ['./all-courses.component.scss'],
 })
 export class AllCoursesComponent implements OnInit {
   courses: Course[] = [];

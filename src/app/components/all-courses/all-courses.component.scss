@@ -1,0 +1,30 @@
+div{
+    margin: 1%;
+}
+.allCours{
+    display: grid;
+   
+        grid-template-columns: repeat(3, 1fr); /* 3 עמודות ברוחב שווה */
+        gap: 2px; /* רווח בין הפריטים, ניתן לשנות לפי הצורך */
+
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+//   .grid-item {
+//     width: 100%; /* רוחב מלא לכל פריט */
+//     height: 200px; /* גובה קבוע */
+//     display: flex;
+//     align-items: center; /* יישור אנכי של התמונה במרכז */
+//     justify-content: center; /* יישור אופקי של התמונה במרכז */
+//     overflow: hidden; /* להסתיר חלקים שמחוץ ל-container */
+//   }
+  
+  
+  .mean{
+    display: flex;
+  }
+

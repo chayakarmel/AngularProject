@@ -38,4 +38,8 @@ $AngularProject-theme: mat.define-light-theme((
 /* You can add global styles to this file, and also import other style files */
 // @import "~bootstrap/dist/css/bootstrap.min.css";
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  
+    // background-image: url('https://www.johnbryce.co.il/wp-content/uploads/2024/04/Bunner-1903X620-%D7%A2%D7%A8%D7%9B%D7%95%D7%AA-%D7%93%D7%99%D7%92%D7%99%D7%98%D7%9C%D7%99%D7%95%D7%AA-1-scaled.jpg');
+
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

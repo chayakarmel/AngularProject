@@ -27,9 +27,9 @@ export class CourseService {
   }
 
   
-  // updateUser(id: number, data: User) {
-  //   return this.myHttp.put<User>(`${this.BASE_URL}/update/${id}`,data);
-  // }
+  updateCourse(id: number, data: Course) {
+    return this.myHttp.put<Course>(`${this.BASE_URL}/${id}`,data);
+  }
   // deleteUser(id:number){
   //   return this.myHttp.delete(`${this.BASE_URL}/delete/${id}`);
   // }

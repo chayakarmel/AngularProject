@@ -3,19 +3,22 @@
       <mat-icon>menu</mat-icon>
     </button>
     <nav>
-   <a routerLink="">Login</a>
-    <a routerLink="/Register/ ">Register</a>
-   <a routerLink="/allCourses">All Courses</a>
-   <a routerLink="/AddCourse">AddCourse</a>
+   <a routerLink="">התחברות</a>
+    <a routerLink="/Register/ ">הרשמה </a>
+    <span class="dot">•</span>
+   <a routerLink="/allCourses">כל הקורסים</a>
+   <a routerLink="/AddCourse">הוסף קורס</a>
 </nav>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
+    <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon"> -->
+     @if(userInitial!=""){
+      <div class="user-initial">{{ userInitial }}</div>}
+    <!-- </button> -->
+    <button (click)="logoutUser()" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon > logout</mat-icon>
     </button>
   </mat-toolbar>
+  
 <!-- <nav>
     <ul>
         <li><a routerLink="">Login</a></li>

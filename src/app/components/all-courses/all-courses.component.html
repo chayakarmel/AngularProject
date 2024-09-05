@@ -1,40 +1,18 @@
-
-<!-- @for (item of courses;  track item.courseId){
-    <app-course-details [oneCourse]="item"></app-course-details>
-    }  --> 
-
-<!-- טופס סינון לפי שם קורס -->
-<!-- <div>
-    <label for="textInput">שם קורס:</label>
-    <input
-      type="text"
-      id="textInput"
-      (input)="onInputChange($event)"
-      placeholder="חפש לפי שם קורס"
-    />
+<div class="allContainer">
+<!-- your-component.component.html -->
+<div class="header">
+  קורסים  
+  מגוון ערכות מקוונות ללמידה עצמית
+</div>
+<div class="container">
+  <div class="box"
+       *ngFor="let item of items"
+       (click)="selectBox(item)"
+       [ngClass]="{'selected': isSelected(item)}">
+    <img [src]="item.icon" [alt]="item.text" class="icon">
+    <p>{{ item.text }}</p>
   </div>
-   <label>קטגוריה</label>
-  <select id="category" name="category"> 
-    @for(item of category; track item.categoryId){
-          <option [value]="item.categoryId">{{item.name}}</option>
-    }
-  </select>
-  <div>
-   
-   
-  </div>
-  
-  <div *ngIf="filteredCourses && filteredCourses.length > 0; else noCourses">
-    <p>קורסים זמינים:</p>
-    <div *ngFor="let item of filteredCourses">
-      <app-course-details [oneCourse]="item"></app-course-details>
-    </div>
-  </div>
-  
-  <ng-template #noCourses>
-    <p>לא נמצאו קורסים התואמים לחיפוש שלך.</p>
-  </ng-template>
-   -->
+</div>
 
 <!-- טופס סינון לפי שם קורס -->
 <div class="mean">
@@ -94,4 +72,4 @@
 <ng-template #noCourses>
   <p>לא נמצאו קורסים התואמים לחיפוש שלך.</p>
 </ng-template>
-
+</div>

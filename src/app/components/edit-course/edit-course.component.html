@@ -1,0 +1,115 @@
+
+<div class="allContainer" >
+    <form [formGroup]="courseForm">
+        <!-- //האם צריך לעשות גם id???? -->
+        <!-- <div>
+            <label> שם הקורס</label>
+            <input type="text" formControlName="courseName" name="courseName" id="courseName" />
+            <div *ngIf="courseForm.controls['courseName'].invalid&& courseForm.controls['courseName'].touched">This Field Is
+                Required
+            </div>
+        </div> -->
+        <!--  שם הקורס -->
+        <div>
+            <label> שם הקורס</label>
+            <input  type="text" formControlName="courseName" name="courseName" id="courseName" />
+            <div *ngIf="courseForm.controls['courseName'].invalid&& courseForm.controls['courseName'].touched">This Field Is
+                Required
+            </div>
+        </div>
+    
+        <!-- קטגוריה -->
+    <div>
+      <label>קטגוריה</label>
+      <select  formControlName="categoryId" id="categoryId"> <!-- השתמש ב-"categoryId" -->
+        @for(item of category; track item.categoryId){
+              <option [value]="item.categoryId">{{item.name}}</option>
+        }
+      </select>
+      <div *ngIf="courseForm.controls['categoryId'].invalid && courseForm.controls['categoryId'].touched">
+        This Field Is Required
+      </div>
+    </div>
+    
+        <!--  מספר שיעורים-->
+        <div>
+            <label> מספר שיעורים</label>
+            <input  type="number" formControlName="numberOfLessons" name="numberOfLessons" id="numberOfLessons" />
+            <div *ngIf="courseForm.controls['numberOfLessons'].invalid&& courseForm.controls['numberOfLessons'].touched">
+                This Field Is
+                Required
+            </div>
+        </div>
+    
+        <!--  תחילת הקורס-->
+        <div>
+            <label> תאריך התחלה</label>
+            <input  type="date" formControlName="startDate" name="startDate" id="startDate" />
+            <div *ngIf="courseForm.controls['startDate'].invalid&& courseForm.controls['startDate'].touched">This Field Is
+                Required
+            </div>
+        </div>
+    
+        <!-- סיליבוס -->
+    
+        <!-- <div>
+            <label> סיליבוס</label>
+            <div *ngFor="let item of syllabus.controls; let i = index">
+                <input type="text" [formControlName]="i" >
+                <button type="button" (click)="removeSyllabus(i)" *ngIf="syllabus.length > 1">מחק
+                </button>
+            </div>
+            <button type="button" (click)="addSyllabus()">הוספת סיליבוס</button>
+        </div> -->
+    
+        <!-- סיליבוס -->
+    <div>
+        <label>סיליבוס</label>
+        <div *ngFor="let item of syllabus.controls; let i = index">
+          <input type="text" [formControlName]="i" />
+          <button type="button" (click)="removeSyllabus(i)" *ngIf="syllabus.length > 1">מחק</button>
+        </div>
+        <button type="button" (click)="addSyllabus()">הוספת סיליבוס</button>
+        <div *ngIf="courseForm.controls['syllabus'].invalid&& courseForm.controls['syllabus'].touched">This
+            Field Is
+            Required
+        </div>
+    </div>  
+    
+    
+    
+        <!--   צורת למידה-->
+        <div>
+            <label> צורת למידה</label>
+            <select formControlName="learningMode" name="learningMode" id="learningMode">
+                <!-- כאן צריך שינוי לפי קטגוריות וכו -->
+                <option value="1">פרונטלי</option>
+                <option value="2"> זום</option>
+            </select>
+            <div *ngIf="courseForm.controls['learningMode'].invalid&& courseForm.controls['learningMode'].touched">This
+                Field Is
+                Required
+            </div>
+        </div>
+    
+        <!-- קוד מורה -->
+        <!-- צריך שינוי לפי שרת , אולי בסלקט? -->
+        <div>
+            <label> קוד מורה</label>
+            <input  type="number" formControlName="lecturerId" name="lecturerId" id="lecturerId" />
+            <div *ngIf="courseForm.controls['lecturerId'].invalid&& courseForm.controls['lecturerId'].touched">
+                This Field Is
+                Required
+            </div>
+        </div>
+    
+        <!--  קישור לתמונה-->
+        <div>
+            <label> קישור לתמונה</label>
+            <input  type="text" formControlName="imagePath" name="imagePath" id="imagePath" />
+        </div>
+    
+        <button type="submit" (click)="saveEditCourse()" [disabled]="!courseForm.valid">Save</button>
+    
+    </form>
+    </div>

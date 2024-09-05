@@ -26,6 +26,8 @@ export class LoginComponent {
         
         if (userExists) {
             alert("The user exists!");
+            sessionStorage.setItem('userName',this.username);
+            sessionStorage.setItem('password', this.password); 
             this.router.navigate(['/allCourses']);
         } else {
             alert("The user doesn't exist!");

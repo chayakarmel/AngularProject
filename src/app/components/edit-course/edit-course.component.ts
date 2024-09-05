@@ -1,39 +1,61 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../services/category.service';
 import {  take } from 'rxjs';
 import Category from '../../../models/Category';
 import { Course } from '../../../models/Course';
 import { CourseService } from '../../services/course.service';
-
 @Component({
-  selector: 'app-add-course',
+  selector: 'app-edit-course',
   standalone: true,
   imports: [ReactiveFormsModule, FormsModule, CommonModule],
-  templateUrl: './add-course.component.html',
-  styleUrl: './add-course.component.scss'
+  templateUrl: './edit-course.component.html',
+  styleUrl: './edit-course.component.scss'
 })
+export class EditCourseComponent implements OnInit{
+  oneCourse: Course={
+    courseName: "Math",
+      categoryId: 2,
+      numberOfLessons: 12,
+      startDate: new Date(2023, 5, 20),
+      syllabus: ["hgf", "nhbvc"],
+      modeId:1,
+      lecturerId: 160,
+      imagePath: "VBN",
+  };
 
-export class AddCourseComponent {
+  
+    id:number=1;
+
   courseForm: FormGroup = new FormGroup({});
   category:Category[]=[];
-  constructor(private fb: FormBuilder, private router: Router,private categories: CategoryService,private course:CourseService) { }
+  constructor(private fb: FormBuilder,private route: ActivatedRoute, private router: Router,private categories: CategoryService,private course:CourseService) { }
 
 
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const data = params['data'];
+      if (data) {
+        
+        this.oneCourse = JSON.parse(data);
+        this.id=JSON.parse(data).courseId;
+        console.log("object",this.oneCourse);
+      }
+    });
+    
     this.courseForm = this.fb.group({
-      courseName: ['', Validators.required],
-      categoryId: ['', Validators.required],
-      numberOfLessons: ['', Validators.required],
-      startDate: ['', Validators.required],
+      courseName: [this.oneCourse.courseName, Validators.required],
+      categoryId: [this.oneCourse.categoryId, Validators.required],
+      numberOfLessons: [this.oneCourse.numberOfLessons, Validators.required],
+      startDate: [this.oneCourse.startDate, Validators.required],
       // syllabus: this.fb.array(['', Validators.required]),
-       syllabus: [''], 
-      learningMode: ['', Validators.required],
-      lecturerId: ['', Validators.required],
-      imagePath: ['']
+       syllabus: [this.oneCourse.syllabus], 
+      learningMode: [this.oneCourse.modeId, Validators.required],
+      lecturerId: [this.oneCourse.lecturerId, Validators.required],
+      imagePath: [this.oneCourse.imagePath]
     });
     this.getCategories();
   }
@@ -58,19 +80,10 @@ export class AddCourseComponent {
       this.removeSyllabus(index);
     }
   }
-  
-  // saveNewCourse(){
-  //   if (this.courseForm.valid) {
-  //         console.log("course:",this.courseForm.value);
-  //         this.router.navigate(['/allCourses']);
-  //       }
-  //     }
-  
-
-  saveNewCourse() {
+  saveEditCourse() {
     try {
         const data: Course = {
-       
+          courseId:this.id,
           courseName: this.courseForm.get('courseName')!.value,
           categoryId: this.courseForm.get('categoryId')?.value,
           numberOfLessons: this.courseForm.get('numberOfLessons')!.value,
@@ -82,10 +95,10 @@ export class AddCourseComponent {
           imagePath: this.courseForm.get('imagePath')!.value,
         }
         console.log(data);
-        this.course.createCourse(data).pipe(take(1)).subscribe(
+        this.course.updateCourse(this.id,data).pipe(take(1)).subscribe(
           myRes => {
             console.log("success", myRes);
-            alert("הקורס נוסף בהצלחה!");
+            alert("הקורס עודכן בהצלחה!");
             this.router.navigate(['/allCourses']);
           }, err => {
             alert("ERROR!");
@@ -97,13 +110,6 @@ export class AddCourseComponent {
     }
   }
 
-
-  //   if (this.courseForm.valid) {
-  //     console.log("course:",this.courseForm.value);
-  //     this.router.navigate(['/allCourses']);
-  //   }
-  // }
-
  getCategories() {
     this.categories.getCategory().pipe(take(1)).subscribe(myRes => {
         this.category=myRes;
@@ -112,7 +118,5 @@ export class AddCourseComponent {
         alert("ERROR!");
     });
 }
-
-
-
 }
+

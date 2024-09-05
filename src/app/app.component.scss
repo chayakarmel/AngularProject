@@ -1,14 +1,85 @@
+
 .mat-tab-group {
-    margin-bottom: 48px;
-  }
-  .example-spacer {
-    flex: 1 1 auto;
-  }
-  nav a{
-    margin: 0% 5%;
-    text-decoration: none;
-    color: gray;
-  }
-  mat-toolbar{
-    text-align: center;
-  }
+  margin-bottom: 48px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+nav {
+  display: flex; /* מאפשר סידור אופקי של הקישורים */
+  justify-content: center; /* ממרכז את הקישורים horizontally */
+  align-items: center; /* מיישר את הקישורים vertically */
+}
+
+nav a {
+  font-weight: bold;
+  text-decoration: none; /* מסיר קווים תחתונים מקישורים */
+  color: rgb(255, 255, 255); /* צבע טקסט לבן */
+  font-size: medium; /* גודל טקסט בינוני */
+  transition: color 0.3s ease; /* אנימציה רכה של שינוי צבע */
+  position: relative; /* מאפשר למקם את הנקודה יחסית לקישור */
+  padding: 0 20px; /* מוסיף רווחים שווים משני הצדדים של הקישורים */
+}
+
+nav a::after {
+  content: "•"; /* סימן נקודה */
+  color: #D90020; /* צבע הנקודה אדום */
+  font-size: 35px; /* גודל הנקודה */
+  margin: 0 15px; /* מרווח בין הנקודה לקישורים */
+  position: absolute; /* מיקום מוחלט */
+  top: 50%; /* מיקום הנקודה באמצע הקישור בגובה */
+  transform: translateY(-50%); /* מיישר את הנקודה אנכית באמצע הקישור */
+}
+
+
+
+nav a:last-child::after {
+  content: ""; /* מסיר את הנקודה אחרי הקישור האחרון */
+}
+
+nav a:hover {
+  color: #D90020; /* צבע קישור אדום בעת ריחוף */
+}
+
+mat-toolbar {
+  justify-content: center; /* ממרכז את הקישורים horizontally */
+direction: rtl;
+  text-align: center;
+  top: 0;
+  position: fixed;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5); /* צבע רקע חצי שקוף */
+}
+
+.mat-toolbar .mat-mdc-button-base.mat-mdc-button-base.mat-unthemed {
+  color: white; /* צבע כפתורים לבן */
+}
+ /* צבע קישור אדום בעת ריחוף */
+
+
+mat-toolbar {
+  text-align: center;
+  top: 0;
+  position: fixed;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5); /* צבע רקע חצי שקוף */
+}
+
+.mat-toolbar .mat-mdc-button-base.mat-mdc-button-base.mat-unthemed {
+  color: white; /* צבע כפתורים לבן */
+}
+.user-initial {
+  background-color:#D90020; /* צבע רקע */
+  border-radius: 50%; /* עיגול מלא */
+  width: 30px; /* רוחב */
+  height: 30px; /* גובה */
+  display: flex; /* מאפשר סידור של תוכן באופן אנכי ואופקי */
+  align-items: center; /* מיישר את הטקסט באמצע בגובה */
+  justify-content: center; /* מיישר את הטקסט באמצע לרוחב */
+  color: #fff; /* צבע טקסט לבן */
+  font-size: 0.9em; /* גודל טקסט */
+  // font-weight: bold; /* עיבוי הטקסט */
+  margin-left: 20px; /* רווח שמאלי בין הפרופיל לשאר התוכן */
+}

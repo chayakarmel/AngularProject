@@ -1,5 +1,5 @@
 
-
+<div class="allContainer" >
 <form [formGroup]="courseForm">
 
     <!--  שם הקורס -->
@@ -76,8 +76,8 @@
         <label> צורת למידה</label>
         <select formControlName="learningMode" name="learningMode" id="learningMode">
             <!-- כאן צריך שינוי לפי קטגוריות וכו -->
-            <option value="InPerson">פרונטלי</option>
-            <option value="zoom"> זום</option>
+            <option value="1">פרונטלי</option>
+            <option value="2"> זום</option>
         </select>
         <div *ngIf="courseForm.controls['learningMode'].invalid&& courseForm.controls['learningMode'].touched">This
             Field Is
@@ -105,3 +105,4 @@
     <button type="submit" (click)="saveNewCourse()" [disabled]="!courseForm.valid">Save</button>
 
 </form>
+</div>

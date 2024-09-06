@@ -109,7 +109,7 @@
             <input  type="text" formControlName="imagePath" name="imagePath" id="imagePath" />
         </div>
     
-        <button type="submit" (click)="saveEditCourse()" [disabled]="!courseForm.valid">Save</button>
-    
+        <button type="submit" (click)="saveEditCourse()" [disabled]="!courseForm.valid">עדכון</button>
+        <button type="submit" (click)="cancel()" [disabled]="!courseForm.valid">ביטול</button>
     </form>
     </div>

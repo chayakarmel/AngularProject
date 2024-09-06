@@ -3,6 +3,9 @@ import { UserService } from '../../services/user.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {  take } from 'rxjs';
+import Swal from 'sweetalert2'
+import Lecturer from '../../../models/Lecturer';
+import { LecturerService } from '../../services/lecturer.service';
 
 @Component({
   selector: 'app-login',
@@ -16,22 +19,52 @@ export class LoginComponent {
   password!: string;
   courseName!:string;
 
-  constructor(private users: UserService, private router: Router) {
+  lecturerExist?:Lecturer;
+  constructor(private lecturers:LecturerService,private users: UserService, private router: Router) {
+  }
+
+ 
+  isLecturerExist(){
+  this.lecturers.getLecturer().pipe(take(1)).subscribe(myRes => {
+    console.log("מרצים:",myRes);
+    this.lecturerExist = myRes.find(user => user.name === this.username && user.password === this.password);
+    console.log(this.lecturerExist?.lecturerId)
+    sessionStorage.setItem('lecturerName',this.username);
+    sessionStorage.setItem('password', this.password); 
+     sessionStorage.setItem('lecturerId',this.lecturerExist!.lecturerId.toString());
+    if (this.lecturerExist) {
+      Swal.fire({
+        text: 'נכנסת בהצלחה',
+        icon: 'success',
+      })
+        this.router.navigate(['/allCourses']);
+    } else {
+   
+        this.isUserExist();
+    }
+}, err => {
+    alert("ERROR!");
+});
   }
 
   isUserExist() {
     this.users.getUser().pipe(take(1)).subscribe(myRes => {
-        console.log(myRes);
         const userExists = myRes.find(user => user.name === this.username && user.password === this.password);
         
-        if (userExists) {
-            alert("The user exists!");
-            sessionStorage.setItem('userName',this.username);
+        sessionStorage.setItem('userName',this.username);
             sessionStorage.setItem('password', this.password); 
+        if (userExists) {
+          Swal.fire({
+            text: 'נכנסת בהצלחה',
+            icon: 'success',
+          })
             this.router.navigate(['/allCourses']);
         } else {
+
+       
             alert("The user doesn't exist!");
             const param = this.username;
+          
             this.router.navigate(['/Register', param]);
         }
     }, err => {

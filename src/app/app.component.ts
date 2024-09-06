@@ -23,17 +23,27 @@ export class AppComponent implements OnInit {
   
     ngOnInit(): void {
       const userName = sessionStorage.getItem('userName');
-    
+      const lecturerName = sessionStorage.getItem('lecturerName');
     // חילץ את האות הראשונה מהשם
     if (userName) {
       this.userInitial = userName.charAt(0).toUpperCase();
       console.log(this.userInitial)
     }
+    else{
+      if(lecturerName){
+        this.userInitial = lecturerName.charAt(0).toUpperCase();
+        console.log(this.userInitial)
+      }
+    }
     }
    logoutUser() {
-    // הסרת נתונים מ-sessionStorage
-    sessionStorage.removeItem('userName');
-    sessionStorage.removeItem('password'); // אם יש לך טוקן או פרטים נוספים לשמור
+    // // הסרת נתונים מ-sessionStorage
+    // sessionStorage.removeItem('userName');
+    // sessionStorage.removeItem('password'); // אם יש לך טוקן או פרטים נוספים לשמור
+    // sessionStorage.removeItem('lecturerName');
+    // sessionStorage.removeItem('lecturerId');
+    sessionStorage.clear();
+
   }
   title = 'AngularProject';
   

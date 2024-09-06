@@ -6,7 +6,7 @@
 
         <label>סיסמה:</label>
         <input type="password" name="password" placeholder="סיסמה" [(ngModel)]="password" />
-        <button type="submit" (click)="isUserExist()" [disabled]>התחבר</button>
+        <button type="submit" (click)="isLecturerExist()" [disabled]>התחבר</button>
     </form>
 </div>
 <br />
@@ -14,6 +14,6 @@
 <form>
     <p>הרשמה כמרצה:</p>
     <input type="text" name="courseName" placeholder="שם הקורס" [(ngModel)]="courseName" />
-    <button  type="submit"  (click)="LecturerRegistration()" [disabled]>הרשם </button>
+    <button  type="submit"  (click)="isLecturerExist()" [disabled]>הרשם </button>
 </form>
 </div>

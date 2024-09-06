@@ -80,6 +80,9 @@ export class EditCourseComponent implements OnInit{
       this.removeSyllabus(index);
     }
   }
+  cancel(){
+    this.router.navigate(['/allCourses']);
+  }
   saveEditCourse() {
     try {
         const data: Course = {

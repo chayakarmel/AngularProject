@@ -1,12 +1,12 @@
 export default class Lecturer {
-    id: number;
+    lecturerId: number;
     name: string;
     address: string;
     email: string;
     password: string;
   
-    constructor(id: number, name: string, address: string, email: string, password: string) {
-      this.id = id;
+    constructor(lecturerId: number, name: string, address: string, email: string, password: string) {
+      this.lecturerId = lecturerId;
       this.name = name;
       this.address = address;
       this.email = email;

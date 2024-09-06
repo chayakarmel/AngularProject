@@ -141,9 +141,12 @@ export class AllCoursesComponent implements OnInit {
   selectedCategory: string = '';
   selectedLearningMode: string = '';
 
+
+
   constructor(private courseService: CourseService, private categories: CategoryService) {}
 
   ngOnInit() {
+   
     this.loadCourses();
     this.getCategories();
   }

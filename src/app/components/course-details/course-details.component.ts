@@ -6,11 +6,12 @@ import { GetModePipe } from '../../pipes/get-mode.pipe';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { IfStmt } from '@angular/compiler';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-course-details',
   standalone: true,
-  imports: [MatIconModule, MatCardModule, MatButtonModule, GetModePipe],
+  imports: [CommonModule,MatIconModule, MatCardModule, MatButtonModule, GetModePipe],
   templateUrl: './course-details.component.html',
   styleUrl: './course-details.component.scss'
 })
@@ -47,7 +48,7 @@ export class CourseDetailsComponent {
       return false;
   }
 
-  closerDate():string{
+  closerDate():boolean{
     // התאריך של היום
     const today = new Date();
     
@@ -66,9 +67,9 @@ export class CourseDetailsComponent {
   
     // בדוק אם התאריך הוא בשבוע הקרוב
     if (courseStartDate >= startOfNextWeek && courseStartDate <= endOfNextWeek) {
-      return 'yellow';
+      return true;
     } else {
-      return 'initial'; // או צבע אחר כדי לסמן תוצאה אחרת
+      return false; // או צבע אחר כדי לסמן תוצאה אחרת
     }
   }
 

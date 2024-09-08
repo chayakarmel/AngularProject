@@ -218,18 +218,18 @@ export class AllCoursesComponent implements OnInit {
   items = [
     {
       text: 'כנסים ואירועים',
-      icon: 'https://www.johnbryce.co.il/wp-content/uploads/2023/06/shape-876@2x.png'
+      icon: 'https://www.johnbryce.co.il/wp-content/uploads/2023/05/5.png'
         },
     {
       text: 'קורסים למנהלים',
-      icon: 'https://www.johnbryce.co.il/wp-content/uploads/2023/04/Star.svg'
+      icon: 'https://www.johnbryce.co.il/wp-content/uploads/2023/06/chair-i.png'
     },
     {
       text: 'קורסי הכשרה לעולם ההייטק',
-      icon: 'https://www.johnbryce.co.il/wp-content/uploads/2023/06/chair-i.png' },
+      icon: 'https://www.johnbryce.co.il/wp-content/uploads/2023/04/Star.svg' },
     {
       text: 'קורסים מקצועיים למתקדמים',
-      icon: 'https://www.johnbryce.co.il/wp-content/uploads/2023/05/5.png'}
+      icon: 'https://www.johnbryce.co.il/wp-content/uploads/2023/06/shape-876@2x.png'}
   ];
 
   selectedItem: any = null;

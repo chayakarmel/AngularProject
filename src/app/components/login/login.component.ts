@@ -6,11 +6,16 @@ import {  take } from 'rxjs';
 import Swal from 'sweetalert2'
 import Lecturer from '../../../models/Lecturer';
 import { LecturerService } from '../../services/lecturer.service';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+// import { BrowserModule } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,MatInputModule,MatFormFieldModule,MatButtonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

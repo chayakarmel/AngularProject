@@ -6,6 +6,7 @@ import { EditCourseComponent } from './components/edit-course/edit-course.compon
 import { LoginComponent } from './components/login/login.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { RegisterComponent } from './components/register/register.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -13,7 +14,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule,RouterOutlet,LoginComponent,AllCoursesComponent,RegisterComponent,NavBarComponent,RouterLink,AddCourseComponent,EditCourseComponent ],
+  imports: [BrowserModule,MatToolbarModule, MatButtonModule, MatIconModule,RouterOutlet,LoginComponent,AllCoursesComponent,RegisterComponent,NavBarComponent,RouterLink,AddCourseComponent,EditCourseComponent ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

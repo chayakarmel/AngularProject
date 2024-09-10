@@ -1,34 +1,23 @@
-<div class="login">
-
-</div>
-
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>שם משתמש</mat-label>
-      <input matInput name="name" placeholder="שם משתמש" [(ngModel)]="username">
-    </mat-form-field>
-  
-    <!-- <mat-form-field class="example-full-width">
-      <mat-label>Leave a comment</mat-label>
-      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-    </mat-form-field> -->
-    <mat-form-field class="example-full-width">
-        <mat-label>סיסמא</mat-label>
-        <input type="password"  name="password" placeholder="סיסמה" [(ngModel)]="password"   matInput>
+<div class="login-container">
+  <h2>התחברות</h2>
+  <form class="example-form" (ngSubmit)="isLecturerExist()">
+      <mat-form-field class="example-full-width">
+          <mat-label>שם משתמש</mat-label>
+          <input matInput name="username" placeholder="שם משתמש" [(ngModel)]="username" required>
       </mat-form-field>
-      <button mat-raised-button  (click)="isLecturerExist()" [disabled]>התחברות</button>
-
-    <!-- @if (emailFormControl.hasError('required')) {
-        <mat-error>Email is <strong>required</strong></mat-error>
-      } -->
+      <mat-form-field class="example-full-width">
+          <mat-label>סיסמא</mat-label>
+          <input type="password" name="password" placeholder="סיסמה" [(ngModel)]="password" matInput required>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!username || !password">התחברות</button>
   </form>
 
-  <form>
-    <p>הרשמה כמרצה:</p>
-    <mat-form-field  class="example-full-width">
-        <mat-label>שם קורס</mat-label>
-        <input  type="text" name="courseName" placeholder="שם הקורס" [(ngModel)]="courseName" matInput>
+  <form (ngSubmit)="LecturerRegistration()">
+      <p>הרשמה כמרצה</p>
+      <mat-form-field class="example-full-width">
+          <mat-label>שם קורס</mat-label>
+          <input matInput name="courseName" placeholder="שם הקורס" [(ngModel)]="courseName" required>
       </mat-form-field>
-      <button mat-raised-button (click)="isLecturerExist()"  [disabled]>הרשם</button>
-</form>
-<!-- appearance="standard" -->
+      <button mat-raised-button color="accent" type="submit" [disabled]="!courseName">הרשם</button>
+  </form>
+</div>

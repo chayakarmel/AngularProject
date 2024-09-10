@@ -1,0 +1,92 @@
+
+.header{
+    color: white;
+    font-weight: bold;
+    font-size: 50px;
+    padding: 200px 100px;
+   background-size: cover;
+   //https://app.hackeru.co.il/wp-content/uploads/2017/09/17.09.03.09.59.19-%D7%A7%D7%95%D7%A8%D7%A1-%D7%AA%D7%9B%D7%A0%D7%95%D7%AA-1.jpg
+    background-image: url('https://www.johnbryce.co.il/wp-content/uploads/2024/04/Bunner-1903X620-%D7%A2%D7%A8%D7%9B%D7%95%D7%AA-%D7%93%D7%99%D7%92%D7%99%D7%98%D7%9C%D7%99%D7%95%D7%AA-1-scaled.jpg'); /* הגדרת תמונת הרקע */
+  }
+  .allCours{
+      display: grid;
+     
+          grid-template-columns: repeat(3, 1fr); /* 3 עמודות ברוחב שווה */
+          gap: 2px; /* רווח בין הפריטים, ניתן לשנות לפי הצורך */
+          background-image: url('https://www.johnbryce.co.il/wp-content/uploads/2024/05/%D7%9B%D7%97%D7%95%D7%9C-scaled.jpg'); /* הגדרת תמונת הרקע */
+          background-repeat: repeat; /* חוזר על התמונה כדי למלא את כל שטח המלבן */
+          background-size: 500px 500px; /* הגדרת גודל התמונה כדי שתהיה קטנה */
+          background-position: center; /* ממקם את התמונה במרכז המלבן */
+          
+  
+          // background-size: cover;
+  }
+  
+  :host {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    
+    
+    .mean{
+      display: flex;
+    }
+
+  
+  
+  .container {
+    margin: 2%;
+    direction: rtl;
+    display: flex;
+    flex-wrap: wrap; /* אפשר למלבן להיפרד לשורות נוספות אם יש צורך */
+    gap: 15px; /* רווח קטן בין המלבנים */
+    padding: 10px; /* רווח קטן מסביב לתוכן */
+    box-sizing: border-box; /* כולל את הריפוד והגבול בגובה ורוחב */
+  }
+  
+  .box {
+    position: relative;
+    flex: 1 1 calc(24% - 20px); /* כל מלבן יתפוס רוחב של 25% מהשורה פחות רווחים */
+    padding: 10px 50px;
+    border: 1px solid black;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* כולל את הריפוד והגבול בגובה ורוחב */
+    min-width: 200px; /* גובה מינימלי למלבן */
+      height: 120px; /* גובה קבוע למלבן */
+  }
+  
+  .box p {
+    margin: 0;
+    padding-right: 15px; /* רווח קטן בין הטקסט לתמונה */
+    font-size: 1.5em; /* הגדלת גודל הטקסט */
+    flex: 1;
+  }
+  
+  .box .icon {
+    width: 40px; /* גודל התמונה */
+    height: auto;
+  }
+  
+  .box:after {
+    content: "";
+    position: absolute;
+   
+    transition: border-color 0.3s, opacity 0.3s;
+  }
+  
+  .box.selected:after {
+    opacity: 1; 
+  }
+  .box.selected {
+    border-color: #D90020;
+    box-shadow: 0 0 0 1px #D90020;
+  }
+  
+  
+ 

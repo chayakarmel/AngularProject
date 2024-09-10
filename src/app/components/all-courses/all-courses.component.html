@@ -1,69 +1,28 @@
 <div class="allContainer">
-<!-- your-component.component.html -->
-<div class="header">
-  קורסים  
-  מגוון ערכות מקוונות ללמידה עצמית
-</div>
-<div class="container">
-  <div class="box"
-       *ngFor="let item of items"
-       (click)="selectBox(item)"
-       [ngClass]="{'selected': isSelected(item)}">
-    <img [src]="item.icon" [alt]="item.text" class="icon">
-    <p>{{ item.text }}</p>
-  </div>
-</div>
-
-<!-- טופס סינון לפי שם קורס -->
 <div class="mean">
-<mat-form-field>
-  <mat-label>סנן לפי שם</mat-label>
-  <input (input)="onInputChange($event)" matInput>
-</mat-form-field>
+  <mat-form-field class="custom-form-field">
+    <mat-label>סנן לפי שם</mat-label>
+    <input (input)="onInputChange($event)" matInput>
+  </mat-form-field>
 
-<mat-form-field >
-  <mat-label>בחר קטגוריה</mat-label>
-  <mat-select id="category" (change)="onCategoryChange($event)">
-    <mat-option  *ngFor="let item of category" [value]="item.categoryId">
-      {{item.name}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field>
-  <mat-label>בחר את אופן הלמידה</mat-label>
-  <mat-select id="learningMode" (change)="onLearningModeChange($event)">
-    <mat-option value="1">פרונטלי</mat-option>
-    <mat-option value="2">זום</mat-option>
-  </mat-select>
-</mat-form-field>
-</div>
-<!-- <div>
-    <label for="textInput">שם קורס:</label>
-    <input
-      type="text"
-      id="textInput"
-      (input)="onInputChange($event)"
-      placeholder="חפש לפי שם קורס"
-    />
-</div> -->
-
-<label for="category">קטגוריה:</label>
-<select id="category" (change)="onCategoryChange($event)">
-  <option value="">בחר קטגוריה</option> <!-- אפשרות לבחירה ריקה כדי לא לסנן לפי קטגוריה -->
-  <option *ngFor="let item of category" [value]="item.categoryId">{{item.name}}</option>
-</select>
-
-<label for="learningMode">אופן למידה:</label>
-<select id="learningMode" (change)="onLearningModeChange($event)">
-  <option value="">בחר אופן למידה</option>
-  <option value="1">פרונטלי</option>
-  <option value="2">זום</option>
-</select>
-
-<!-- הצגת הקורסים -->
-<div class="allCours" *ngIf="filteredCourses && filteredCourses.length > 0; else noCourses">
   
+
+<div class="filter-container">
+  <label for="category">קטגוריה:</label>
+  <select id="category" (change)="onCategoryChange($event)" class="custom-select">
+    <option value="">בחר קטגוריה</option>
+    <option *ngFor="let item of category" [value]="item.categoryId">{{item.name}}</option>
+  </select>
+
+  <label for="learningMode">אופן למידה:</label>
+  <select id="learningMode" (change)="onLearningModeChange($event)" class="custom-select">
+    <option value="">בחר אופן למידה</option>
+    <option value="1">פרונטלי</option>
+    <option value="2">זום</option>
+  </select>
+</div>
+
+<div class="allCours" *ngIf="filteredCourses && filteredCourses.length > 0; else noCourses">
   <div class="grid-item" *ngFor="let item of filteredCourses">
     <app-course-details [oneCourse]="item"></app-course-details>
   </div>
@@ -72,4 +31,3 @@
 <ng-template #noCourses>
   <p>לא נמצאו קורסים התואמים לחיפוש שלך.</p>
 </ng-template>
-</div>

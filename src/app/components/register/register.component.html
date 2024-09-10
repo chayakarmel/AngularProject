@@ -1,44 +1,47 @@
-
-<form [formGroup]="registerForm">
-
-<!-- שם -->
-    <div><label>שם</label>
-
-        <input type="text" formControlName="name" name="name" id="name" [(ngModel)]="paramValue" />
-        <div *ngIf="registerForm.controls['name'].invalid&&registerForm.controls['name'].touched">This Field Is Required
-        </div>
-    </div>
-
-<!-- כתובת -->
-    <div>
-        <label>כתובת</label>
-        <input type="text" formControlName="address" name="address" id="address" />
-    </div>
-
-<!-- מייל -->
-    <div>
-        <label>מייל</label>
-        <input type="email" formControlName="email" name="email" id="email" />
-        <div *ngIf="registerForm.controls['email'].errors?.['required']&&registerForm.controls['email'].touched">This
-            Field Is Required</div>
-        <div *ngIf="registerForm.controls['email'].errors?.['email']">Invalid email address</div>
-    </div>
-
-<!-- סיסמה -->
-    <div>
-        <label>סיסמה</label>
-        <input type="password" formControlName="password" name="password" id="password" />
-        <div *ngIf="registerForm.controls['password'].errors?.['required']&&registerForm.controls['password'].touched">
-            This
-            Field Is Required</div>
-        <div *ngIf="registerForm.controls['password'].errors?.['minlength']">Password mast be at least 6 characters
-        </div>
-        <div *ngIf="registerForm.controls['password'].errors?.['maxlength']">Password can't be more then 10 characters
-        </div>
-        <div *ngIf="registerForm.controls['password'].errors?.['pattern']">Password need match</div>
-    </div>
-
-<!-- כפתור שמירה -->
-    <button type="submit" (click)="saveNewUser()" [disabled]="!registerForm.valid">Save</button>
-
-</form>
+<form [formGroup]="registerForm" class="register-form">
+    <!-- שם -->
+    <mat-form-field appearance="fill">
+      <mat-label>שם</mat-label>
+      <input matInput formControlName="name" name="name" id="name" [(ngModel)]="paramValue" />
+      <mat-error *ngIf="registerForm.controls['name'].invalid && registerForm.controls['name'].touched">
+       שם הוא שדה חובה
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- כתובת -->
+    <mat-form-field appearance="fill">
+      <mat-label>כתובת</mat-label>
+      <input matInput formControlName="address" name="address" id="address" />
+    </mat-form-field>
+  
+    <!-- מייל -->
+    <mat-form-field appearance="fill">
+      <mat-label>מייל</mat-label>
+      <input matInput type="email" formControlName="email" name="email" id="email" />
+      <mat-error *ngIf="registerForm.controls['email'].errors?.['required'] && registerForm.controls['email'].touched">
+אימייל הוא שדה חובה      </mat-error>
+      <mat-error *ngIf="registerForm.controls['email'].errors?.['email']">
+       המייל לא תקין
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- סיסמה -->
+    <mat-form-field appearance="fill">
+      <mat-label>סיסמה</mat-label>
+      <input matInput type="password" formControlName="password" name="password" id="password" />
+      <mat-error *ngIf="registerForm.controls['password'].errors?.['required'] && registerForm.controls['password'].touched">
+סיסמה היא שדה חובה      </mat-error>
+      <mat-error *ngIf="registerForm.controls['password'].errors?.['minlength']">
+סיסמה חייבת להיות להיות מינימום 6 ספרות      </mat-error>
+      <mat-error *ngIf="registerForm.controls['password'].errors?.['maxlength']">
+סיסמה חייבת להיות מקסימום 10 ספרות      </mat-error>
+      <mat-error *ngIf="registerForm.controls['password'].errors?.['pattern']">
+סיסמה צריכה להיות בעלת לפחות 2 אותיות      </mat-error>
+    </mat-form-field>
+  
+    <!-- כפתור שמירה -->
+    <button mat-raised-button color="primary" type="submit" (click)="saveNewUser()" [disabled]="!registerForm.valid">
+      Save
+    </button>
+  </form>
+  

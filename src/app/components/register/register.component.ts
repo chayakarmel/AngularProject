@@ -6,11 +6,15 @@ import { Router } from '@angular/router';
 import User from '../../../models/User';
 import { UserService } from '../../services/user.service';
 import { take } from 'rxjs';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,CommonModule],
+  imports: [FormsModule, ReactiveFormsModule,CommonModule,MatFormFieldModule,MatButtonModule,MatInputModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -54,10 +58,16 @@ export class RegisterComponent implements OnInit {
         this.user.createUser(data).pipe(take(1)).subscribe(
           myRes => {
             console.log("success", myRes);
-            alert("נרשמת בהצלחה!");
+           Swal.fire({
+          text: 'נכנסת בהצלחה',
+          icon: 'success',
+        })
             this.router.navigate(['/allCourses']);
           }, err => {
-            alert("ERROR!");
+            Swal.fire({
+              text: 'שגיאה',
+              icon: 'error',
+            })
           }
         );
       } else {

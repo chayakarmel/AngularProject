@@ -5,7 +5,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { GetModePipe } from '../../pipes/get-mode.pipe';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import { IfStmt } from '@angular/compiler';
 import { CommonModule } from '@angular/common';
 
 @Component({

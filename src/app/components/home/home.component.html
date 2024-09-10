@@ -1,0 +1,14 @@
+    <!-- your-component.component.html -->
+    <div class="header">
+      קורסים  
+      מגוון ערכות מקוונות ללמידה עצמית
+    </div>
+    <div class="container">
+      <div class="box"
+           *ngFor="let item of items"
+           (click)="selectBox(item)"
+           [ngClass]="{'selected': isSelected(item)}">
+        <img [src]="item.icon" [alt]="item.text" class="icon">
+        <p>{{ item.text }}</p>
+      </div>
+    </div>

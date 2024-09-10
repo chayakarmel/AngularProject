@@ -7,21 +7,39 @@ import {  take } from 'rxjs';
 import Category from '../../../models/Category';
 import { Course } from '../../../models/Course';
 import { CourseService } from '../../services/course.service';
-
+import Swal from 'sweetalert2';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatOption } from '@angular/material/core';
+import { MatIcon } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @Component({
   selector: 'app-add-course',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,MatFormFieldModule,MatOption,MatIcon,  ReactiveFormsModule,
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,MatNativeDateModule,MatDatepickerModule],
   templateUrl: './add-course.component.html',
-  styleUrl: './add-course.component.scss'
+  styleUrls: ['./add-course.component.scss']
 })
-
 export class AddCourseComponent {
   courseForm: FormGroup = new FormGroup({});
-  category:Category[]=[];
-  constructor(private fb: FormBuilder, private router: Router,private categories: CategoryService,private course:CourseService) { }
+  categories: Category[] = [];
 
-
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private categoryService: CategoryService,
+    private courseService: CourseService
+  ) { }
 
   ngOnInit() {
     this.courseForm = this.fb.group({
@@ -29,8 +47,8 @@ export class AddCourseComponent {
       categoryId: ['', Validators.required],
       numberOfLessons: ['', Validators.required],
       startDate: ['', Validators.required],
-      // syllabus: this.fb.array(['', Validators.required]),
-       syllabus: [''], 
+       syllabus: this.fb.array(['']),
+       // syllabus: [''], 
       learningMode: ['', Validators.required],
       lecturerId: ['', Validators.required],
       imagePath: ['']
@@ -46,73 +64,65 @@ export class AddCourseComponent {
     this.syllabus.push(this.fb.control(''));
   }
 
-
   removeSyllabus(index: number): void {
-    (this.courseForm.get('syllabus') as FormArray).removeAt(index);
+    this.syllabus.removeAt(index);
   }
 
- 
   onInputChange(index: number) {
     const control = this.syllabus.at(index);
     if (control.value === '') {
       this.removeSyllabus(index);
     }
   }
-  
-  // saveNewCourse(){
-  //   if (this.courseForm.valid) {
-  //         console.log("course:",this.courseForm.value);
-  //         this.router.navigate(['/allCourses']);
-  //       }
-  //     }
-  
 
   saveNewCourse() {
-    try {
-        const data: Course = {
-       
-          courseName: this.courseForm.get('courseName')!.value,
-          categoryId: this.courseForm.get('categoryId')?.value,
-          numberOfLessons: this.courseForm.get('numberOfLessons')!.value,
-          startDate: this.courseForm.get('startDate')!.value,
-   
+    if (this.courseForm.valid) {
+      const data: Course = {
+        courseName: this.courseForm.get('courseName')!.value,
+        categoryId: this.courseForm.get('categoryId')?.value,
+        numberOfLessons: this.courseForm.get('numberOfLessons')!.value,
+        startDate: this.courseForm.get('startDate')!.value,
          syllabus: this.courseForm.get('syllabus')!.value,
-          modeId: this.courseForm.get('learningMode')!.value,
-          lecturerId: this.courseForm.get('lecturerId')!.value,
-          imagePath: this.courseForm.get('imagePath')!.value,
-        }
-        console.log(data);
-        this.course.createCourse(data).pipe(take(1)).subscribe(
-          myRes => {
-            console.log("success", myRes);
-            alert("הקורס נוסף בהצלחה!");
+       // syllabus:"",
+        modeId: this.courseForm.get('learningMode')!.value,
+        lecturerId: this.courseForm.get('lecturerId')!.value,
+        imagePath: this.courseForm.get('imagePath')!.value,
+      };
+      console.log(data)
+      this.courseService.createCourse(data).pipe(take(1)).subscribe(
+        
+        myRes => {
+          console.log(myRes);
+          Swal.fire({
+            text: 'הקורס נוסף בהצלחה!',
+            icon: 'success',
+          }).then(() => {
             this.router.navigate(['/allCourses']);
-          }, err => {
-            alert("ERROR!");
-          }
-        );
-      }  catch (error) {
-      // Handle errors from isUserExist
-      console.error('Error checking user existence:', error);
+          });
+        }, err => {
+          
+          Swal.fire({
+            text: 'שגיאה בהוספת הקורס',
+            icon: 'error',
+          });
+        }
+      );
+    } else {
+      Swal.fire({
+        text: 'נא למלא את כל השדות הנדרשים',
+        icon: 'warning',
+      });
     }
   }
 
-
-  //   if (this.courseForm.valid) {
-  //     console.log("course:",this.courseForm.value);
-  //     this.router.navigate(['/allCourses']);
-  //   }
-  // }
-
- getCategories() {
-    this.categories.getCategory().pipe(take(1)).subscribe(myRes => {
-        this.category=myRes;
-        console.log(this.category);
-      }, err => {
-        alert("ERROR!");
+  getCategories() {
+    this.categoryService.getCategory().pipe(take(1)).subscribe(myRes => {
+      this.categories = myRes;
+    }, err => {
+      Swal.fire({
+        text: 'שגיאה בטעינת הקטגוריות',
+        icon: 'error',
+      });
     });
-}
-
-
-
+  }
 }

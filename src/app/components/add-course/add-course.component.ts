@@ -53,37 +53,67 @@ export class AddCourseComponent {
       lecturerId: ['', Validators.required],
       imagePath: ['']
     });
-    this.getCategories();
-  }
+    this.getCategories();  }
 
-  get syllabus(): FormArray {
+  // get syllabus(): FormArray {
+  //   return this.courseForm.get('syllabus') as FormArray;
+  // }
+
+  get syllabus() {
     return this.courseForm.get('syllabus') as FormArray;
   }
+
 
   addSyllabus() {
     this.syllabus.push(this.fb.control(''));
   }
 
-  removeSyllabus(index: number): void {
-    this.syllabus.removeAt(index);
-  }
+  // removeSyllabus(index: number): void {
+  //   this.syllabus.removeAt(index);
+  // }
 
-  onInputChange(index: number) {
-    const control = this.syllabus.at(index);
-    if (control.value === '') {
-      this.removeSyllabus(index);
+  
+  removeSyllabus(index: number) {
+    if (this.syllabus.length > 1) {
+      this.syllabus.removeAt(index);
     }
   }
 
+  getCategories() {
+    this.categoryService.getCategory().pipe(take(1)).subscribe(myRes => {
+      this.categories = myRes;
+    }, err => {
+      Swal.fire({
+        text: 'שגיאה בטעינת הקטגוריות',
+        icon: 'error',
+      });
+    });
+  }
+
+  // onInputChange(index: number) {
+  //   const control = this.syllabus.at(index);
+  //   if (control.value === '') {
+  //     this.removeSyllabus(index);
+  //   }
+  // }
+
   saveNewCourse() {
     if (this.courseForm.valid) {
+      const arr = this.courseForm.get('syllabus')?.value.filter((field: string) => field.trim() !== '');
+  
+      if (arr.length === 0) {
+        Swal.fire('Error!', 'The syllabus cannot be empty.', 'error');
+        return;
+      }
+      const syllabus = arr.join(';');
+      console.log(syllabus);
+      
       const data: Course = {
         courseName: this.courseForm.get('courseName')!.value,
         categoryId: this.courseForm.get('categoryId')?.value,
         numberOfLessons: this.courseForm.get('numberOfLessons')!.value,
         startDate: this.courseForm.get('startDate')!.value,
-         syllabus: this.courseForm.get('syllabus')!.value,
-       // syllabus:"",
+         syllabus,
         modeId: this.courseForm.get('learningMode')!.value,
         lecturerId: this.courseForm.get('lecturerId')!.value,
         imagePath: this.courseForm.get('imagePath')!.value,
@@ -92,7 +122,7 @@ export class AddCourseComponent {
       this.courseService.createCourse(data).pipe(take(1)).subscribe(
         
         myRes => {
-          console.log(myRes);
+          
           Swal.fire({
             text: 'הקורס נוסף בהצלחה!',
             icon: 'success',
@@ -115,14 +145,5 @@ export class AddCourseComponent {
     }
   }
 
-  getCategories() {
-    this.categoryService.getCategory().pipe(take(1)).subscribe(myRes => {
-      this.categories = myRes;
-    }, err => {
-      Swal.fire({
-        text: 'שגיאה בטעינת הקטגוריות',
-        icon: 'error',
-      });
-    });
-  }
+
 }

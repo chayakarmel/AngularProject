@@ -54,8 +54,8 @@
         <div formArrayName="syllabus">
           <div *ngFor="let item of syllabus.controls; let i = index">
             <mat-form-field appearance="fill">
-              <input matInput [formControlName]="i" (ngModelChange)="onInputChange(i)" />
-              <button mat-icon-button type="button" (click)="removeSyllabus(i)" *ngIf="syllabus.length > 1">
+              <input matInput [formControlName]="i" placeholder="סילבוס הוסף"/>
+              <button mat-icon-button type="button" (click)="removeSyllabus(i)">
                 <mat-icon>delete</mat-icon>
               </button>
             </mat-form-field>

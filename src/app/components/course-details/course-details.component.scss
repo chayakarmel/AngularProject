@@ -1,7 +1,23 @@
 
-  
   .thisWeek {
-    border: 2px solid #4caf50; /* או צבע מתאים להדגשה */
-    background-color: #e8f5e9; /* צבע רקע להדגשה */
+  border:  2px blue solid;
   }
-  
+  img {
+    border-radius: 2%;
+    max-width: 100%; /* מתאימה את הרוחב לאלמנט ההורה */
+    height: auto; /* שומר על הפרופורציות */
+      width: 350px; /* רוחב קבוע */
+      height: 170px; /* גובה קבוע */
+      object-fit: cover; /* חותך את התמונה אם היא לא מתאימה למידות */
+}
+.course-card{
+  direction: rtl;
+  align-items: center;
+}
+.imgCategory{
+  max-width: 200%; /* מתאימה את הרוחב לאלמנט ההורה */
+  height: auto; /* שומר על הפרופורציות */
+    width: 50px; /* רוחב קבוע */
+    height:50px; /* גובה קבוע */
+    object-fit: contain; /* חותך את התמונה אם היא לא מתאימה למידות */
+}

@@ -1,30 +1,23 @@
-<div [ngClass]="{'thisWeek': closerDate()}">
-  <mat-card class="course-card" appearance="outlined">
+<!-- <div [ngClass]="{'thisWeek': closerDate()}"> -->
+  <div >
+  <mat-card class="course-card" [ngClass]="{'thisWeek': closerDate()}" appearance="outlined">
     <mat-card-header>
       <div mat-card-avatar class="course-avatar"></div>
       <mat-icon class="mode-icon">{{ oneCourse.modeId | getMode }}</mat-icon>
       <mat-card-title>{{ oneCourse.courseName }}</mat-card-title>
-      <mat-card-subtitle>קטגוריה: {{ oneCourse.categoryId }}</mat-card-subtitle>
+      <!-- <mat-card-subtitle>{{ oneCourse.categoryId | getCategory | async }} </mat-card-subtitle> -->
+      <img class="imgCategory" [src]="oneCourse.categoryId | getCategory | async"/>
     </mat-card-header>
     
     <img mat-card-image [src]="oneCourse.imagePath" alt="{{ oneCourse.courseName }}">
     
-    <mat-card-content>
-      <p class="course-syllabus">
-        <strong>סיליבוס:</strong><br>
-        <span *ngFor="let item of oneCourse.syllabus; let i = index">
-          {{ item }}<ng-container *ngIf="i < oneCourse.syllabus.length - 1">, </ng-container>
-        </span>
-      </p>
-    </mat-card-content>
+    
     
     <mat-card-actions>
       <button mat-button color="primary" *ngIf="coursesLecturer()" (click)="update()">
         <mat-icon>edit</mat-icon> עדכון פרטים
       </button>
-      <button mat-button color="accent">
-        <mat-icon>thumb_up</mat-icon> LIKE
-      </button>
+    
     </mat-card-actions>
   </mat-card>
 </div>

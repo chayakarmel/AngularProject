@@ -5,13 +5,15 @@ import { EditCourseComponent } from './components/edit-course/edit-course.compon
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { CourseDetailsComponent } from './components/course-details/course-details.component'; // Import the Course Details component
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
-    {path:'',component:LoginComponent},
-    {path:"home",component:HomeComponent},
-    {path:'allCourses',component:AllCoursesComponent},
-    {path:'Register/:param',component:RegisterComponent},
-    {path:'AddCourse',component:AddCourseComponent},
-    {path:'EditCourse',component:EditCourseComponent}
-   
+    { path: '', component: LoginComponent },
+    { path: 'home', component: HomeComponent },
+    { path: 'allCourses', component: AllCoursesComponent, canActivate: [AuthGuard] },
+    { path: 'Register/:param', component: RegisterComponent },
+    { path: 'AddCourse', component: AddCourseComponent },
+    { path: 'EditCourse', component: EditCourseComponent },
+    { path: 'courseDetails/:id', component: CourseDetailsComponent } // Protect the route
 ];

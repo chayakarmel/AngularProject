@@ -6,11 +6,12 @@ import { GetModePipe } from '../../pipes/get-mode.pipe';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { GetCategoryPipe } from '../../pipes/get-category.pipe';
 
 @Component({
   selector: 'app-course-details',
   standalone: true,
-  imports: [CommonModule,MatIconModule, MatCardModule, MatButtonModule, GetModePipe],
+  imports: [CommonModule,MatIconModule, MatCardModule, MatButtonModule, GetModePipe,GetCategoryPipe],
   templateUrl: './course-details.component.html',
   styleUrl: './course-details.component.scss'
 })
@@ -47,30 +48,26 @@ export class CourseDetailsComponent {
       return false;
   }
 
-  closerDate():boolean{
-    // התאריך של היום
+  closerDate(): boolean {
     const today = new Date();
     
-    // התחלת השבוע הקרוב (תחילת השבוע הנוכחי + 7 ימים)
-    const startOfNextWeek = new Date(today);
-    startOfNextWeek.setDate(today.getDate() + 7);
-    startOfNextWeek.setHours(0, 0, 0, 0); // לא כולל שעות, דקות ושניות
-  
-    // סוף השבוע הקרוב (תחילת השבוע הקרוב + 6 ימים)
-    const endOfNextWeek = new Date(startOfNextWeek);
-    endOfNextWeek.setDate(startOfNextWeek.getDate() + 6);
-    endOfNextWeek.setHours(23, 59, 59, 999); // כולל שעות, דקות ושניות
-  
-    // התאריך של ה-startDate מהקורס
+    // התחלת השבוע הנוכחי
+    const startOfThisWeek = new Date(today);
+    startOfThisWeek.setDate(today.getDate() - today.getDay()); // חישוב התאריך הראשון של השבוע
+    startOfThisWeek.setHours(0, 0, 0, 0);
+    
+    // סוף השבוע הנוכחי
+    const endOfThisWeek = new Date(startOfThisWeek);
+    endOfThisWeek.setDate(startOfThisWeek.getDate() + 6);
+    endOfThisWeek.setHours(23, 59, 59, 999);
+    
     const courseStartDate = new Date(this.oneCourse.startDate);
   
-    // בדוק אם התאריך הוא בשבוע הקרוב
-    if (courseStartDate >= startOfNextWeek && courseStartDate <= endOfNextWeek) {
-      return true;
-    } else {
-      return false; // או צבע אחר כדי לסמן תוצאה אחרת
-    }
+    // בדוק אם התאריך הוא בשבוע הנוכחי
+    return courseStartDate >= startOfThisWeek && courseStartDate <= endOfThisWeek;
   }
+  
+  
 
 }
 

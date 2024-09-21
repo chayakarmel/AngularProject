@@ -10,11 +10,12 @@ import { CourseDetailsComponent } from '../course-details/course-details.compone
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../services/category.service';
 import Category from '../../../models/Category';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-all-courses',
   standalone: true,
-  imports: [CourseDetailsComponent, CommonModule,MatFormFieldModule, MatInputModule, MatSelectModule],
+  imports: [CourseDetailsComponent, CommonModule,MatFormFieldModule, MatInputModule, MatSelectModule,RouterLink],
   templateUrl: './all-courses.component.html',
   styleUrls: ['./all-courses.component.scss'],
 })

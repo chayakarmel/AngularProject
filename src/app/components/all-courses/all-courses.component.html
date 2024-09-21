@@ -24,7 +24,7 @@
 
 <div class="allCours" *ngIf="filteredCourses && filteredCourses.length > 0; else noCourses">
   <div class="grid-item" *ngFor="let item of filteredCourses">
-    <app-course-details [oneCourse]="item"></app-course-details>
+   <a routerLink="/oneCourse/{{item.courseId}}"><app-course-details [oneCourse]="item"></app-course-details></a>
   </div>
 </div>
 

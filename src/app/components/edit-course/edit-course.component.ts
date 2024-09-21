@@ -14,6 +14,7 @@ import { CourseService } from '../../services/course.service';
   templateUrl: './edit-course.component.html',
   styleUrl: './edit-course.component.scss'
 })
+
 export class EditCourseComponent implements OnInit{
   oneCourse: Course={
     courseName: "Math",

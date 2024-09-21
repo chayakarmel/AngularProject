@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CourseDetailsComponent } from './components/course-details/course-details.component'; // Import the Course Details component
 import { AuthGuard } from './auth.guard';
+import { OneCourseComponent } from './components/one-course/one-course.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -15,5 +16,6 @@ export const routes: Routes = [
     { path: 'Register/:param', component: RegisterComponent },
     { path: 'AddCourse', component: AddCourseComponent },
     { path: 'EditCourse', component: EditCourseComponent },
-    { path: 'courseDetails/:id', component: CourseDetailsComponent } // Protect the route
+    { path: 'courseDetails/:id', component: CourseDetailsComponent },
+    {path:'oneCourse/:id',component: OneCourseComponent}
 ];

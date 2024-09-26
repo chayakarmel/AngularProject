@@ -21,7 +21,8 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
   courseName: string = '';
-
+  id:number=1;
+  
   lecturerExist?: Lecturer;
 
   constructor(
@@ -34,11 +35,12 @@ export class LoginComponent {
     this.lecturerService.getLecturer().pipe(take(1)).subscribe(myRes => {
       console.log("מרצים:", myRes);
       this.lecturerExist = myRes.find(user => user.name === this.username && user.password === this.password);
-      
+      const item=myRes.find(i => i.name==this.username)
+      this.id=item.lecturerId |1;
       if (this.lecturerExist) {
         sessionStorage.setItem('lecturerName', this.username);
         sessionStorage.setItem('password', this.password); 
-        sessionStorage.setItem('lecturerId', this.lecturerExist.lecturerId.toString());
+        sessionStorage.setItem('lecturerId',this.id?.toString());
 
         Swal.fire({
           text: 'נכנסת בהצלחה',
@@ -57,7 +59,7 @@ export class LoginComponent {
       
     });
   }
-
+ 
   isUserExist() {
     this.userService.getUser().pipe(take(1)).subscribe(myRes => {
       const userExists = myRes.find(user => user.name === this.username && user.password === this.password);
@@ -65,6 +67,7 @@ export class LoginComponent {
       if (userExists) {
         sessionStorage.setItem('userName', this.username);
         sessionStorage.setItem('password', this.password); 
+       
         
         Swal.fire({
           text: 'נכנסת בהצלחה',
@@ -89,6 +92,6 @@ export class LoginComponent {
   }
 
   LecturerRegistration() {
-    this.router.navigate(['/Register', this.courseName]);
+    this.router.navigate(['/Register-lecture']);
   }
 }

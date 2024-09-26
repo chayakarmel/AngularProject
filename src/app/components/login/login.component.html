@@ -18,6 +18,6 @@
           <mat-label>שם קורס</mat-label>
           <input matInput name="courseName" placeholder="שם הקורס" [(ngModel)]="courseName" required>
       </mat-form-field>
-      <button mat-raised-button color="accent" type="submit" [disabled]="!courseName">הרשם</button>
+      <button mat-raised-button color="accent" (click)="LecturerRegistration()" [disabled]="!courseName">הרשם</button>
   </form>
 </div>

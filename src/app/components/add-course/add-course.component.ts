@@ -90,12 +90,7 @@ export class AddCourseComponent {
     });
   }
 
-  // onInputChange(index: number) {
-  //   const control = this.syllabus.at(index);
-  //   if (control.value === '') {
-  //     this.removeSyllabus(index);
-  //   }
-  // }
+
 
   saveNewCourse() {
     if (this.courseForm.valid) {

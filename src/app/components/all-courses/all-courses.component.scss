@@ -3,6 +3,8 @@
 .custom-form-field {
   width: 100%;
   margin-bottom: 16px;
+  height: 80px; 
+
 }
 
 .custom-mat-select .mat-select-trigger {
@@ -52,6 +54,7 @@
 
 .grid-item {
   flex: 1 1 calc(33.333% - 16px);
+  gap: 2%;
   box-sizing: border-box;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -69,5 +72,18 @@ p {
 }
 .allContainer{
   margin-top: 5%;
+}
+.filter-container {
+  display: flex;
+  justify-content: center; /* ממרכז את האלמנטים */
+  gap: 16px; /* רווח בין האלמנטים */
+  margin: 0 auto; /* ממרכז את המיכל כולו */
+  max-width: 800px; /* הגדרת רוחב מקסימלי */
+}
+
+.custom-form-field,
+.custom-select {
+  flex: 1; /* מבטיח שכל אחד מהשדות יתפוס את אותו שטח */
+  max-width: 400px;
 }
 

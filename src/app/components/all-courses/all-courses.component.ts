@@ -1,5 +1,5 @@
 
-import {MatSelectModule} from '@angular/material/select';
+import {MatSelectChange, MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {ChangeDetectionStrategy ,Component, OnInit } from '@angular/core';
@@ -15,7 +15,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-all-courses',
   standalone: true,
-  imports: [CourseDetailsComponent, CommonModule,MatFormFieldModule, MatInputModule, MatSelectModule,RouterLink],
+  imports: [CourseDetailsComponent, CommonModule,MatFormFieldModule, MatInputModule,RouterLink,MatSelectModule],
   templateUrl: './all-courses.component.html',
   styleUrls: ['./all-courses.component.scss'],
 })
@@ -67,11 +67,11 @@ export class AllCoursesComponent implements OnInit {
     }
   }
 
-  onLearningModeChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedLearningMode = selectElement.value;
+  onCategoryChange(event: MatSelectChange): void {
+    this.selectedCategory = event.value; // אין צורך בהמרה
+    console.log("selectedCategory", this.selectedCategory);
     this.filterCourses();
-  }
+}
 
 
   onInputChange(event: Event): void {
@@ -80,12 +80,11 @@ export class AllCoursesComponent implements OnInit {
     this.filterCourses();
   }
 
-  onCategoryChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedCategory = selectElement.value;
-    console.log("selectedCategory",this.selectedCategory);
+
+  onLearningModeChange(event: MatSelectChange): void {
+    this.selectedLearningMode = event.value; // אין צורך בהמרה
     this.filterCourses();
-  }
+}
 
   getCategories() {
     this.categories.getCategory().pipe(take(1)).subscribe({

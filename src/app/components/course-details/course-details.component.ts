@@ -33,20 +33,20 @@ export class CourseDetailsComponent {
       imagePath: "VBN",
     }
 
-  update() {
-    // this.router.navigate(['/EditCourse',this.oneCourse.courseName]);
-    const myObjectJson = JSON.stringify(this.oneCourse);
-    this.router.navigate(['/EditCourse'], { queryParams: { data: myObjectJson } });
-  }
+  // update() {
+  //   // this.router.navigate(['/EditCourse',this.oneCourse.courseName]);
+  //   const myObjectJson = JSON.stringify(this.oneCourse);
+  //   this.router.navigate(['/EditCourse'], { queryParams: { data: myObjectJson } });
+  // }
 
-  lecturerId:string = sessionStorage.getItem('lecturerId') || "";
-  coursesLecturer(): boolean {
+  // lecturerId:string = sessionStorage.getItem('lecturerId') || "";
+  // coursesLecturer(): boolean {
    
-    if ( this.lecturerId!=""&& Number(this.lecturerId) === this.oneCourse.lecturerId)
-      return true;
-    else 
-      return false;
-  }
+  //   if ( this.lecturerId!=""&& Number(this.lecturerId) === this.oneCourse.lecturerId)
+  //     return true;
+  //   else 
+  //     return false;
+  // }
 
   closerDate(): boolean {
     const today = new Date();

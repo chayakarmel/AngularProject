@@ -1,0 +1,104 @@
+:host {
+    
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* ליישר את התוכן מלמעלה */
+    height: 100vh; /* גובה מלא של העמוד */
+    background: linear-gradient(to right, #fbc2eb, #a6c0fe);
+    padding-top: 70px; /* רווח מלמעלה */
+  }
+  
+  .course-container {
+    padding: 30px; /* רווח פנימי קטן יותר */
+    background-color: rgba(255, 255, 255, 0.9); /* רקע לבן שקוף */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 600px; /* הקטנת המקסימום לרוחב */
+    width: 100%; /* תופס את כל הרוחב עד למקסימום */
+    
+    .course-header {
+      text-align: center;
+      margin-bottom: 20px;
+  
+      h1 {
+        font-size: 2.2em; /* הקטנת גודל הכותרת */
+        color: #333; /* צבע כהה */
+      }
+  
+      .course-image {
+        width: 100%;
+        max-height: 250px; /* הקטנת גובה התמונה */
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+    }
+  
+    .course-details, .course-syllabus {
+      margin: 15px 0; /* רווח קטן יותר */
+  
+     
+      
+        h2 {
+          font-size: 2em; /* גודל הכותרת */
+          color: #333; /* צבע כהה */
+          text-align: center; /* ממרכז את הכותרת */
+          margin-bottom: 20px;
+          position: relative; /* עבור קו תחתון */
+        }
+      
+        /* קו תחתון מתחת לכותרת */
+        h2::after {
+          content: '';
+          display: block;
+          width: 50px; /* רוחב הקו */
+          height: 4px; /* גובה הקו */
+          background-color: #fbc2eb; /* צבע הקו */
+          margin: 10px auto; /* ממרכז את הקו */
+          border-radius: 5px; /* פינות מעוגלות */
+        }
+      
+        .syllabus-list {
+          background-color: #ffffff; /* רקע לבן */
+          border-radius: 10px; /* פינות מעוגלות */
+          padding: 20px; /* רווח פנימי */
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* צל עדין */
+          transition: transform 0.3s; /* אפקט מעבר */
+      
+          /* אפקט מעבר בעת ריחוף */
+          &:hover {
+            transform: scale(1.02); /* הגדלה קלה בעת ריחוף */
+          }
+      
+          ul {
+            list-style-type: none; /* ביטול סגנון ברשימה */
+            padding: 0; /* ביטול רווחים */
+            margin: 0; /* ביטול רווחים */
+      
+            li {
+              background-color: #f0f8ff; /* רקע בהיר לכל נושא */
+              margin: 10px 0; /* רווח בין הנושאים */
+              padding: 10px; /* רווח פנימי */
+              border-left: 5px solid #fbc2eb; /* גבול בצד שמאל */
+              border-radius: 5px; /* פינות מעוגלות */
+              transition: background-color 0.3s; /* אפקט מעבר */
+              
+              /* אפקט שינוי צבע בעת ריחוף */
+              &:hover {
+                background-color: #e0f7fa; /* שינוי צבע */
+              }
+            }
+          }
+        }
+      
+      p {
+        font-size: 1em; /* הקטנת גודל הטקסט */
+        color: #666; /* צבע כהה */
+        margin: 5px 0;
+      }
+  
+    }
+  }
+
+  
+  

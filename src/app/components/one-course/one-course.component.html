@@ -1,11 +1,36 @@
-<p>one-course works!</p>
-<!-- getStringsArray() {
-    return this.http.get<{ data: string }>(this.apiUrl).subscribe(response => {
-      const longString = response.data;
-      
-      // המרת המחרוזת למערך
-      const arrayFromServer = longString.split(',');
+<div class="course-container">
+  <div class="course-header">
+    <h1>{{ course.courseName }}</h1>
+    <img [src]="course.imagePath" alt="{{ course.courseName }}" class="course-image">
+  </div>
   
-      console.log(arrayFromServer);
-    });
-  } -->
+  <div class="course-details">
+    <h2>פרטי הקורס</h2>
+    <p><strong>קטגוריה:</strong> {{ course.categoryId }}</p>
+    <p><strong>מספר שיעורים:</strong> {{ course.numberOfLessons }}</p>
+    <p><strong>תאריך התחלה:</strong> {{ course.startDate | date: 'dd/MM/yyyy' }}</p>
+   @if(course.modeId==1){
+     <p><strong>מצב הלימוד:
+      </strong >פרונטלי</p>}
+      @else{
+        <p><strong>מצב הלימוד:
+        </strong >זום</p>
+      }
+    <p><strong>מורה:</strong> {{ course.lecturerId }}</p>
+  </div>
+  <mat-card-actions>
+    <button mat-button color="primary" *ngIf="coursesLecturer()" (click)="update()">
+      <mat-icon>edit</mat-icon> עדכון פרטים
+    </button>
+  
+  </mat-card-actions>
+  <div class="course-syllabus">
+    <h2>סילבוס</h2>
+    <div class="syllabus-list">
+      <ul>
+        <li *ngFor="let topic of arraySylabus">{{ topic }}</li>
+      </ul>
+    </div>
+  </div>
+ 
+</div>
